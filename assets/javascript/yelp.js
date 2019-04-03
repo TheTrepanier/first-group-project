@@ -1,22 +1,29 @@
 $(document).ready(function () {
 
-    var eventYelp = "tacos";
-    var locationYelp = "gilbert";
-    var myurl = "https://api.yelp.com/v3/businesses/search?term=" + eventYelp + "&location=" + locationYelp + "&limit=5";
+    var eventYelp = "steak";
+    var locationYelp = "tempe";
+    var limitYelp = 9;
+
+    // JavaScript Document
+    var queryURL = "https://cors-anywhere.herokuapp.com/";
+    var yelpApiUrl = "https://api.yelp.com/v3/businesses/search?";
+    var apiKey = "K3fxulpxH74l-AIXKot7PQq5mqsfYt8sStpiNQ7IqWEkH_CxYz74_7G_kRmd2cU1EU37UDN07XzOPsT0fQ01xaQlI53KWs1nbpLV_D_OKAub-bLUptqFxtVPq6GfXHYx"
 
     $.ajax({
-        url: myurl,
+        url: queryURL + yelpApiUrl,
         method: "GET",
-        dataType: "json",
+        data: {
+            "location": locationYelp,
+            "term": eventYelp,
+            "limit": limitYelp
+        },
         headers: {
-            "Authorization": "Bearer K3fxulpxH74l-AIXKot7PQq5mqsfYt8sStpiNQ7IqWEkH_CxYz74_7G_kRmd2cU1EU37UDN07XzOPsT0fQ01xaQlI53KWs1nbpLV_D_OKAub-bLUptqFxtVPq6GfXHYx"
-            //"Authorization": "Bearer K3fxulpxH74l-AIXKot7PQq5mqsfYt8sStpiNQ7IqWEkH_CxYz74_7G_kRmd2cU1EU37UDN07XzOPsT0fQ01xaQlI53KWs1nbpLV_D_OKAub-bLUptqFxtVPq6GfXHYx",
+
+            "Authorization": `Bearer ${apiKey}`
         }
     }).then(function (data) {
         // Grab the results from the API JSON return
         var totalresults = data.total;
-        // Display a header on the page with the number of results
-        $("#results").append("<h5>We discovered " + totalresults + " results!</h5>");
         // Itirate through the JSON array of 'businesses' which was returned by the API
         $.each(data.businesses, function (i, item) {
             // Store each business's object in a variable
