@@ -1,13 +1,13 @@
-$(document).ready(function () {
+var yelpCall = function (locationFromSearch) {
 
     var eventYelp = "steak";
-    var locationYelp = "tempe";
+    var locationYelp = locationFromSearch;
     var limitYelp = 9;
 
     // JavaScript Document
     var queryURL = "https://cors-anywhere.herokuapp.com/";
     var yelpApiUrl = "https://api.yelp.com/v3/businesses/search?";
-    var apiKey = "K3fxulpxH74l-AIXKot7PQq5mqsfYt8sStpiNQ7IqWEkH_CxYz74_7G_kRmd2cU1EU37UDN07XzOPsT0fQ01xaQlI53KWs1nbpLV_D_OKAub-bLUptqFxtVPq6GfXHYx"
+    var apiKey = "K3fxulpxH74l-AIXKot7PQq5mqsfYt8sStpiNQ7IqWEkH_CxYz74_7G_kRmd2cU1EU37UDN07XzOPsT0fQ01xaQlI53KWs1nbpLV_D_OKAub-bLUptqFxtVPq6GfXHYx";
 
     $.ajax({
         url: queryURL + yelpApiUrl,
@@ -44,4 +44,4 @@ $(document).ready(function () {
 
     });
 
-});
+};

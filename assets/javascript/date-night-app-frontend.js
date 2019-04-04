@@ -20,16 +20,35 @@ var navbar = $("<nav uk-navbar>").addClass("uk-navbar-container uk-margin").appe
 
 function searchEvent() {
     $("#root").empty();
-    $("#root").append(navbar);
+    var resultsContainer = $("<div>").attr("id", "results").addClass("container");
+    $("#root").append(navbar, resultsContainer);
     var eventSearchTerm = $("#search-box").val();
     console.log("searching for event");
 }
 
 function searchLocation() {
+    var locationSearchTerm = "";
+    if ($("#search-box").val() != "") {
+        locationSearchTerm = $("#search-box").val();
+    }
     $("#root").empty();
-    $("#root").append(navbar);
+    var resultsContainer = $("<div>").attr("id", "results").addClass("container");
+    $("#root").append(navbar, resultsContainer);
+    locationSearchTerm = locationSearchTerm.replace(/\s/g, "+");
+    yelpCall(locationSearchTerm);
+    console.log(locationSearchTerm);
+}
 
-    console.log("searching for location");
+function navbarSearch() {
+    var locationSearchTerm = "";
+    if ($("#navbar-search").val() != "") {
+        locationSearchTerm = $("#navbar-search").val();
+    }
+
+    $("#results").empty();
+    locationSearchTerm = locationSearchTerm.replace(/\s/g, "+");
+    yelpCall(locationSearchTerm);
+    console.log(locationSearchTerm);
 }
 
 $(document).ready(function () {
@@ -40,4 +59,6 @@ $(document).ready(function () {
 
     $("#event-button").on("click", searchEvent);
     $("#location-button").on("click", searchLocation);
+
+    $(document.body).on("click", "#navbar-location-button", navbarSearch);
 });
