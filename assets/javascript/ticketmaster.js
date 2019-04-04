@@ -1,4 +1,4 @@
-$(function() {
+var ticketMasterCall = function() {
   var queryURL = "https://app.ticketmaster.com/discovery/v2/events.json?";
   var search = "&keyword=comerica+theatre";
   var apiKey = "&apikey=uSxl2gTHIkk0ZOlvcFjRxmWklVwyB41K";
@@ -14,4 +14,4 @@ $(function() {
       console.log(eventList[i]._embedded.venues[0].name);
     }
   });
-});
+};
