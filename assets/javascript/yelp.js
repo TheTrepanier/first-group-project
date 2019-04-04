@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
-    var eventYelp = "steak";
-    var locationYelp = "tempe";
+    var eventYelp = "";
+    var locationYelp = "locationFromSearch";
     var limitYelp = 9;
 
     // JavaScript Document
