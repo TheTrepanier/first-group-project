@@ -27,19 +27,26 @@ var yelpCall = function (locationFromSearch) {
         // Itirate through the JSON array of 'businesses' which was returned by the API
         $.each(data.businesses, function (i, item) {
             // Store each business's object in a variable
-            var id = item.id;
-            var alias = item.alias;
             var phone = item.display_phone;
             var image = item.image_url;
             var name = item.name;
             var rating = item.rating;
-            var reviewcount = item.review_count;
-            var address = item.location.address1;
-            var city = item.location.city;
-            var state = item.location.state;
-            var zipcode = item.location.zip_code;
+            var starRate = ""
+            for (let index = 0; index < rating; index++) {
+                starRate += "⭐";
+            }
             // Append our result into our page
-            $("#results").append('<div id="' + id + '" style="margin-top:50px;margin-bottom:50px;"><img src="' + image + '" style="width:200px;height:150px;"><br>We found <b>' + name + '</b> (' + alias + ')<br>Business ID: ' + id + '<br> Located at: ' + address + ' ' + city + ', ' + state + ' ' + zipcode + '<br>The phone number for this business is: ' + phone + '<br>This business has a rating of ' + rating + ' with ' + reviewcount + ' reviews.</div>');
+            var yelpImg = $("<img uk-cover>").attr("src", image).attr("alt", name);
+            // var yelpImgCanvas = $("<canvas>").attr("width", "600px").attr("height", "400px");
+            var yelpCardMediaLeft = $("<div>").addClass("uk-card-media-left uk-cover-container").append(yelpImg);
+            var yelpCardTitle = $("<h2>").addClass("uk-card-title").text(name);
+            var yelpCardText = $("<p>").text(item.location.display_address);
+            var yelpCardStarRating = $("<p>").text(starRate);
+            var yelpCardBody = $("<div>").addClass("uk-card-body").append(yelpCardTitle, yelpCardText, yelpCardStarRating);
+            var bodyDiv = $("<div>").append(yelpCardBody);
+            var yelpResultsDiv = $("<div uk-grid>").addClass("uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin uk-margin-auto").append(yelpCardMediaLeft, bodyDiv);
+            yelpResultsDiv.css({"width" : "45%"});
+            $("#results").append(yelpResultsDiv);
         });
 
     });
