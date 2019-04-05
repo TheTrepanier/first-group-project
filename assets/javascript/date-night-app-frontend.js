@@ -32,7 +32,7 @@ function searchLocation() {
         locationSearchTerm = $("#search-box").val();
     }
     $("#root").empty();
-    var resultsContainer = $("<div>").attr("id", "results").addClass("container");
+    var resultsContainer = $("<div>").attr("id", "results").addClass("container uk-margin-auto");
     $("#root").append(navbar, resultsContainer);
     locationSearchTerm = locationSearchTerm.replace(/\s/g, "+");
     yelpCall(locationSearchTerm);
