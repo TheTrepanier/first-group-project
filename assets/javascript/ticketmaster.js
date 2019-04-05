@@ -7,11 +7,11 @@ var ticketMasterCall = function() {
     method: "GET"
   }).then(function(response) {
     var eventList = response._embedded.events;
-    console.log(eventList);
+    // console.log(eventList);
     for (let i = 0; i < eventList.length; i++) {
-      console.log(eventList[i].name);
-      console.log(eventList[i].url);
-      console.log(eventList[i]._embedded.venues[0].name);
+      // console.log(eventList[i].name);
+      // console.log(eventList[i].url);
+      // console.log(eventList[i]._embedded.venues[0].name);
     }
   });
 };
