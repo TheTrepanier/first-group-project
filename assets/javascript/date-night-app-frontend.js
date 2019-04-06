@@ -28,11 +28,8 @@ function searchEvent() {
     $("#root").append(navbar, resultsContainer);
     eventSearchTerm = eventSearchTerm.replace(/\s/g, "+");
     ticketMasterCall(eventSearchTerm);
-    console.log(eventSearchTerm);
 }
-function navbarEventSearch() {
-    console.log("inside Navbar");
-    
+function navbarEventSearch() { 
     var eventSearchTerm = "";
     if ($("#navbar-search").val() != "") {
         eventSearchTerm = $("#navbar-search").val();
@@ -40,9 +37,8 @@ function navbarEventSearch() {
     $("#results").empty();
     eventSearchTerm = eventSearchTerm.replace(/\s/g, "+");
     ticketMasterCall(eventSearchTerm);
-    console.log(eventSearchTerm)
 }
-function searchLocation() {
+function searchLocation() {    
     var locationSearchTerm = "";
     if ($("#search-box").val() != "") {
         locationSearchTerm = $("#search-box").val();
