@@ -1,7 +1,7 @@
 // Visual Elements
 var masthead = $("<h1>").addClass("uk-text-center");
 var searchInput = $("<input>").attr("id", "search-box").addClass("uk-input uk-align-center uk-form-width-large").attr("type", "uk-input").attr("placeholder", "Look for things to do here");
-var searchEventButton = $("<button>").attr("id", "event-button").addClass("uk-button uk-button-default").css({"margin-left": "10px", "margin-right": "10px"}).text("search by event");
+var searchEventButton = $("<button>").attr("id", "event-button").addClass("uk-button uk-button-default").css({"margin-left": "10px", "margin-right": "10px"}).text("search by Venue");
 var searchLocationButton = $("<button>").attr("id", "location-button").addClass("uk-button uk-button-default").css({"margin-left": "10px", "margin-right": "10px"}).text("search by location");
 var buttonsDiv = $("<div>").addClass("uk-text-center").append(searchEventButton, searchLocationButton);
 
@@ -19,14 +19,26 @@ var navbar = $("<nav uk-navbar>").addClass("uk-navbar-container uk-margin").appe
 
 
 function searchEvent() {
+    var eventSearchTerm = "";
+    if ($("#search-box").val() != "") {
+        eventSearchTerm = $("#search-box").val();
+    }
     $("#root").empty();
     var resultsContainer = $("<div>").attr("id", "results").addClass("container");
     $("#root").append(navbar, resultsContainer);
-    var eventSearchTerm = $("#search-box").val();
-    console.log("searching for event");
+    eventSearchTerm = eventSearchTerm.replace(/\s/g, "+");
+    ticketMasterCall(eventSearchTerm);
 }
-
-function searchLocation() {
+function navbarEventSearch() { 
+    var eventSearchTerm = "";
+    if ($("#navbar-search").val() != "") {
+        eventSearchTerm = $("#navbar-search").val();
+    }
+    $("#results").empty();
+    eventSearchTerm = eventSearchTerm.replace(/\s/g, "+");
+    ticketMasterCall(eventSearchTerm);
+}
+function searchLocation() {    
     var locationSearchTerm = "";
     if ($("#search-box").val() != "") {
         locationSearchTerm = $("#search-box").val();
@@ -61,4 +73,5 @@ $(document).ready(function () {
     $("#location-button").on("click", searchLocation);
 
     $(document.body).on("click", "#navbar-location-button", navbarSearch);
+    $(document.body).on("click", "#navbar-event-button", navbarEventSearch);
 });
