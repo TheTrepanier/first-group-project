@@ -1,8 +1,8 @@
 // Visual Elements
 var masthead = $("<h1>").addClass("uk-text-center");
 var searchInput = $("<input>").attr("id", "search-box").addClass("uk-input uk-align-center uk-form-width-large").attr("type", "uk-input").attr("placeholder", "Look for things to do here");
-var searchEventButton = $("<button>").attr("id", "event-button").addClass("uk-button uk-button-default").css({"margin-left": "10px", "margin-right": "10px"}).text("search by Venue");
-var searchLocationButton = $("<button>").attr("id", "location-button").addClass("uk-button uk-button-default").css({"margin-left": "10px", "margin-right": "10px"}).text("search by location");
+var searchEventButton = $("<button>").attr("id", "event-button").addClass("uk-button uk-button-default").css({ "margin-left": "10px", "margin-right": "10px" }).text("search by Venue");
+var searchLocationButton = $("<button>").attr("id", "location-button").addClass("uk-button uk-button-default").css({ "margin-left": "10px", "margin-right": "10px" }).text("search by location");
 var buttonsDiv = $("<div>").addClass("uk-text-center").append(searchEventButton, searchLocationButton);
 
 // Navbar
@@ -22,26 +22,33 @@ function searchEvent() {
     var eventSearchTerm = "";
     if ($("#search-box").val() != "") {
         eventSearchTerm = $("#search-box").val();
+
+        database.ref("Recent Event").push({search: eventSearchTerm});
     }
     $("#root").empty();
     var resultsContainer = $("<div>").attr("id", "results").addClass("container");
     $("#root").append(navbar, resultsContainer);
     eventSearchTerm = eventSearchTerm.replace(/\s/g, "+");
     ticketMasterCall(eventSearchTerm);
+
 }
-function navbarEventSearch() { 
+function navbarEventSearch() {
     var eventSearchTerm = "";
     if ($("#navbar-search").val() != "") {
         eventSearchTerm = $("#navbar-search").val();
+
+        database.ref("Recent Event").push({search: eventSearchTerm});
     }
     $("#results").empty();
     eventSearchTerm = eventSearchTerm.replace(/\s/g, "+");
     ticketMasterCall(eventSearchTerm);
 }
-function searchLocation() {    
+function searchLocation() {
     var locationSearchTerm = "";
     if ($("#search-box").val() != "") {
         locationSearchTerm = $("#search-box").val();
+
+        database.ref("Recent Location").push({search: locationSearchTerm});
     }
     $("#root").empty();
     var resultsContainer = $("<div>").attr("id", "results").addClass("container uk-margin-auto");
@@ -55,6 +62,8 @@ function navbarSearch() {
     var locationSearchTerm = "";
     if ($("#navbar-search").val() != "") {
         locationSearchTerm = $("#navbar-search").val();
+
+        database.ref("Recent Location").push({search: locationSearchTerm});
     }
 
     $("#results").empty();
