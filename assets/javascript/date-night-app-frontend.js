@@ -22,54 +22,46 @@ function searchEvent() {
     var eventSearchTerm = "";
     if ($("#search-box").val() != "") {
         eventSearchTerm = $("#search-box").val();
-
         database.ref("Recent Event").push({search: eventSearchTerm});
+        $("#root").empty();
+        var resultsContainer = $("<div>").attr("id", "results").addClass("container");
+        $("#root").append(navbar, resultsContainer);
+        eventSearchTerm = eventSearchTerm.replace(/\s/g, "+");
+        ticketMasterCall(eventSearchTerm);
     }
-    $("#root").empty();
-    var resultsContainer = $("<div>").attr("id", "results").addClass("container");
-    $("#root").append(navbar, resultsContainer);
-    eventSearchTerm = eventSearchTerm.replace(/\s/g, "+");
-    ticketMasterCall(eventSearchTerm);
-
 }
 function navbarEventSearch() {
     var eventSearchTerm = "";
     if ($("#navbar-search").val() != "") {
         eventSearchTerm = $("#navbar-search").val();
-
         database.ref("Recent Event").push({search: eventSearchTerm});
+        $("#results").empty();
+        eventSearchTerm = eventSearchTerm.replace(/\s/g, "+");
+        ticketMasterCall(eventSearchTerm);
     }
-    $("#results").empty();
-    eventSearchTerm = eventSearchTerm.replace(/\s/g, "+");
-    ticketMasterCall(eventSearchTerm);
 }
 function searchLocation() {
     var locationSearchTerm = "";
     if ($("#search-box").val() != "") {
         locationSearchTerm = $("#search-box").val();
-
         database.ref("Recent Location").push({search: locationSearchTerm});
+        $("#root").empty();
+        var resultsContainer = $("<div>").attr("id", "results").addClass("container uk-margin-auto");
+        $("#root").append(navbar, resultsContainer);
+        locationSearchTerm = locationSearchTerm.replace(/\s/g, "+");
+        yelpCall(locationSearchTerm);
     }
-    $("#root").empty();
-    var resultsContainer = $("<div>").attr("id", "results").addClass("container uk-margin-auto");
-    $("#root").append(navbar, resultsContainer);
-    locationSearchTerm = locationSearchTerm.replace(/\s/g, "+");
-    yelpCall(locationSearchTerm);
-    console.log(locationSearchTerm);
 }
 
 function navbarLocationSearch() {
     var locationSearchTerm = "";
     if ($("#navbar-search").val() != "") {
         locationSearchTerm = $("#navbar-search").val();
-
         database.ref("Recent Location").push({search: locationSearchTerm});
+        $("#results").empty();
+        locationSearchTerm = locationSearchTerm.replace(/\s/g, "+");
+        yelpCall(locationSearchTerm);
     }
-
-    $("#results").empty();
-    locationSearchTerm = locationSearchTerm.replace(/\s/g, "+");
-    yelpCall(locationSearchTerm);
-    console.log(locationSearchTerm);
 }
 
 $(document).ready(function () {
