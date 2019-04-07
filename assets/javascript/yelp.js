@@ -1,6 +1,6 @@
 var yelpCall = function (locationFromSearch) {
 
-    var eventYelp = "steak";
+    var eventYelp = "food";
     var locationYelp = locationFromSearch;
     var limitYelp = 9;
 
