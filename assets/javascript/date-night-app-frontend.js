@@ -58,7 +58,7 @@ function searchLocation() {
     console.log(locationSearchTerm);
 }
 
-function navbarSearch() {
+function navbarLocationSearch() {
     var locationSearchTerm = "";
     if ($("#navbar-search").val() != "") {
         locationSearchTerm = $("#navbar-search").val();
@@ -81,6 +81,6 @@ $(document).ready(function () {
     $("#event-button").on("click", searchEvent);
     $("#location-button").on("click", searchLocation);
 
-    $(document.body).on("click", "#navbar-location-button", navbarSearch);
+    $(document.body).on("click", "#navbar-location-button", navbarLocationSearch);
     $(document.body).on("click", "#navbar-event-button", navbarEventSearch);
 });
