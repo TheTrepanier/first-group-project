@@ -21,7 +21,7 @@ var locationInputDiv = $("<div>").addClass("uk-form-controls uk-margin-small-bot
 var locationEventLabel = $("<label>").addClass("uk-form-label").attr("for", "offcanvasLocationEventBar").text("Type of Food");
 var locationEventInput = $("<input>").addClass("uk-input").attr("id", "offcanvasLocationEventBar").attr("type", "text");
 var locationEventInputDiv = $("<div>").addClass("uk-form-controls").append(locationEventInput);
-var moreSpecificYelpCallButton = $("<button>").addClass("uk-button uk-button-primary uk-align-right").text("Search");
+var moreSpecificYelpCallButton = $("<button>").attr("id", "moreSpecificYelpCallButton").addClass("uk-button uk-button-primary uk-align-right").text("Search");
 
 var offCanvasFormDiv = $("<div>").addClass("uk-margin").append(locationLabel, locationInputDiv, locationEventLabel, locationEventInputDiv);
 var offCanvasForm = $("<form>").addClass("uk-form-stacked").append(offCanvasFormDiv);
@@ -41,54 +41,57 @@ function searchEvent() {
     var eventSearchTerm = "";
     if ($("#search-box").val() != "") {
         eventSearchTerm = $("#search-box").val();
-
         database.ref("Recent Event").push({search: eventSearchTerm});
+        $("#root").empty();
+        var resultsContainer = $("<div>").attr("id", "results").addClass("container");
+        $("#root").append(navbar, resultsContainer);
+        eventSearchTerm = eventSearchTerm.replace(/\s/g, "+");
+        ticketMasterCall(eventSearchTerm);
     }
-    $("#root").empty();
-    var resultsContainer = $("<div>").attr("id", "results").addClass("container");
-    $("#root").append(navbar, resultsContainer);
-    eventSearchTerm = eventSearchTerm.replace(/\s/g, "+");
-    ticketMasterCall(eventSearchTerm);
-
 }
 function navbarEventSearch() {
     var eventSearchTerm = "";
     if ($("#navbar-search").val() != "") {
         eventSearchTerm = $("#navbar-search").val();
-
         database.ref("Recent Event").push({search: eventSearchTerm});
+        $("#results").empty();
+        eventSearchTerm = eventSearchTerm.replace(/\s/g, "+");
+        ticketMasterCall(eventSearchTerm);
     }
-    $("#results").empty();
-    eventSearchTerm = eventSearchTerm.replace(/\s/g, "+");
-    ticketMasterCall(eventSearchTerm);
 }
 function searchLocation() {
     var locationSearchTerm = "";
     if ($("#search-box").val() != "") {
         locationSearchTerm = $("#search-box").val();
-
         database.ref("Recent Location").push({search: locationSearchTerm});
+        $("#root").empty();
+        var resultsContainer = $("<div>").attr("id", "results").addClass("container uk-margin-auto");
+        $("#root").append(navbar, resultsContainer);
+        locationSearchTerm = locationSearchTerm.replace(/\s/g, "+");
+        yelpCall(locationSearchTerm);
     }
-    $("#root").empty();
-    var resultsContainer = $("<div>").attr("id", "results").addClass("container uk-margin-auto");
-    $("#root").append(navbar, resultsContainer);
-    locationSearchTerm = locationSearchTerm.replace(/\s/g, "+");
-    yelpCall(locationSearchTerm);
-    console.log(locationSearchTerm);
 }
-
-function navbarSearch() {
+function navbarLocationSearch() {
     var locationSearchTerm = "";
     if ($("#navbar-search").val() != "") {
         locationSearchTerm = $("#navbar-search").val();
-
         database.ref("Recent Location").push({search: locationSearchTerm});
+        $("#results").empty();
+        locationSearchTerm = locationSearchTerm.replace(/\s/g, "+");
+        yelpCall(locationSearchTerm);
+    }
+}
+function offcanvasYelpSearch() {
+    var locationSearchTerm = $("#offcanvasLocationBar").val();
+    var locationEventSearchTerm = $("#offcanvasLocationEventBar").val();
+    if (locationSearchTerm != "" && locationEventSearchTerm != "") {
+        database.ref("Recent Detailed Location").push({search: locationSearchTerm, detail: locationEventSearchTerm});
+        $("#results").empty();
+        locationSearchTerm = locationSearchTerm.replace(/\s/g, "+");
+        locationEventSearchTerm = locationEventSearchTerm.replace(/\s/g, "+");
+        modifiedYelpCall(locationSearchTerm, locationEventSearchTerm);
     }
 
-    $("#results").empty();
-    locationSearchTerm = locationSearchTerm.replace(/\s/g, "+");
-    yelpCall(locationSearchTerm);
-    console.log(locationSearchTerm);
 }
 
 $(document).ready(function () {
@@ -100,6 +103,7 @@ $(document).ready(function () {
     $("#event-button").on("click", searchEvent);
     $("#location-button").on("click", searchLocation);
 
-    $(document.body).on("click", "#navbar-location-button", navbarSearch);
+    $(document.body).on("click", "#navbar-location-button", navbarLocationSearch);
     $(document.body).on("click", "#navbar-event-button", navbarEventSearch);
+    $(document.body).on("click", "#moreSpecificYelpCallButton", offcanvasYelpSearch);
 });
