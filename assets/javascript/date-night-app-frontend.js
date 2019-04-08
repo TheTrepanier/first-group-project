@@ -7,9 +7,11 @@ var buttonsDiv = $("<div>").addClass("uk-text-center").append(searchEventButton,
 
 // Navbar
 var logo = $("<div>").addClass("uk-navbar-item uk-logo").text("NightOut!");
-var navSeachBar = $("<input>").attr("id", "navbar-search").addClass("uk-input uk-width-large").attr("type", "uk-input").attr("placeholder", "Look for things to do here");
-var navEventBtn = $("<button>").attr("id", "navbar-event-button").addClass("uk-button uk-button-default uk-margin-small-right").text("search by event");
-var navLocationBtn = $("<button>").attr("id", "navbar-location-button").addClass("uk-button uk-button-default uk-margin-medium-right").text("search by location");
+
+var navSeachBar = $("<input>").attr("id", "navbar-search").addClass("uk-input uk-width-small@s uk-width-medium@m uk-width-medium@l uk-width-large").attr("type", "uk-input").attr("placeholder", "Look for things to do here");
+var navEventBtn = $("<button>").attr("id", "navbar-event-button").addClass("uk-button uk-button-default uk-width-small@s uk-width-medium@m uk-width-medium@l uk-margin-small-right").text("search by event");
+var navLocationBtn = $("<button>").attr("id", "navbar-location-button").addClass("uk-button uk-button-default uk-width-small@s uk-width-medium@m uk-width-medium@l uk-margin-medium-right").text("search by location");
+
 var navbarForm = $("<form>").attr("action", "javascript:void(0)").append(navSeachBar);
 var navbarSearchDiv = $("<div>").addClass("uk-navbar-item").append(navbarForm);
 var navbarLeftDiv = $("<div>").addClass("uk-navbar-left").append(logo, navbarSearchDiv);
