@@ -1,5 +1,5 @@
 var ticketMasterCall = function(eventSearch) {
-  var tmqueryURL = "https://app.ticketmaster.com/discovery/v2/events.json?";
+  var tmqueryURL = "https://app.ticketmaster.com/discovery/v2/events.json?&radius=20&countryCode=us&stateCode=AZ&sort=date,asc";
   var tmsearch = "&keyword=" + eventSearch;
   var tmapiKey = "&apikey=uSxl2gTHIkk0ZOlvcFjRxmWklVwyB41K";
  
