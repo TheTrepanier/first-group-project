@@ -4,18 +4,37 @@ var searchInput = $("<input>").attr("id", "search-box").addClass("uk-input uk-al
 var searchEventButton = $("<button>").attr("id", "event-button").addClass("uk-button uk-button-default").css({ "margin-left": "10px", "margin-right": "10px" }).text("search by Venue");
 var searchLocationButton = $("<button>").attr("id", "location-button").addClass("uk-button uk-button-default").css({ "margin-left": "10px", "margin-right": "10px" }).text("search by location");
 var buttonsDiv = $("<div>").addClass("uk-text-center").append(searchEventButton, searchLocationButton);
+var hr = $("<hr>");
 
 // Navbar
 var logo = $("<div>").addClass("uk-navbar-item uk-logo").text("NightOut!");
 var navSeachBar = $("<input>").attr("id", "navbar-search").addClass("uk-input uk-width-large").attr("type", "uk-input").attr("placeholder", "Look for things to do here");
 var navEventBtn = $("<button>").attr("id", "navbar-event-button").addClass("uk-button uk-button-default uk-margin-small-right").text("search by event");
 var navLocationBtn = $("<button>").attr("id", "navbar-location-button").addClass("uk-button uk-button-default uk-margin-medium-right").text("search by location");
+
+// offcanvas setion of menu
+var hamburgerMenu = $("<a uk-navbar-toggle-icon uk-toggle>").attr("href", "#offcanvas-usage").addClass("uk-margin-medium-right");
+var offCanvasTitle = $("<h3>").text("Get More Specific With The Location Search");
+var locationLabel = $("<label>").addClass("uk-form-label").attr("for", "offcanvasLocationBar").text("Location");
+var locationInput = $("<input>").addClass("uk-input").attr("id", "offcanvasLocationBar").attr("type", "text");
+var locationInputDiv = $("<div>").addClass("uk-form-controls uk-margin-small-bottom").append(locationInput);
+var locationEventLabel = $("<label>").addClass("uk-form-label").attr("for", "offcanvasLocationEventBar").text("Type of Food");
+var locationEventInput = $("<input>").addClass("uk-input").attr("id", "offcanvasLocationEventBar").attr("type", "text");
+var locationEventInputDiv = $("<div>").addClass("uk-form-controls").append(locationEventInput);
+var moreSpecificYelpCallButton = $("<button>").addClass("uk-button uk-button-primary uk-align-right").text("Search");
+
+var offCanvasFormDiv = $("<div>").addClass("uk-margin").append(locationLabel, locationInputDiv, locationEventLabel, locationEventInputDiv);
+var offCanvasForm = $("<form>").addClass("uk-form-stacked").append(offCanvasFormDiv);
+var offCanvasDiv = $("<div>").addClass("uk-offcanvas-bar").html("<button class=\"uk-offcanvas-close\" type=\"button\" uk-close></button>").append(offCanvasTitle, hr, offCanvasForm, moreSpecificYelpCallButton);
+var offCanvasPage = $("<div>").attr("id", "offcanvas-usage").attr("uk-offcanvas", "flip: false").append(offCanvasDiv);
+
+// navbar search elements
 var navbarForm = $("<form>").attr("action", "javascript:void(0)").append(navSeachBar);
 var navbarSearchDiv = $("<div>").addClass("uk-navbar-item").append(navbarForm);
 var navbarLeftDiv = $("<div>").addClass("uk-navbar-left").append(logo, navbarSearchDiv);
-var navbarRightDiv = $("<div>").addClass("uk-navbar-right").append(navEventBtn, navLocationBtn);
-var navbar = $("<nav uk-navbar>").addClass("uk-navbar-container uk-margin").append(navbarLeftDiv, navbarRightDiv);
+var navbarRightDiv = $("<div>").addClass("uk-navbar-right").append(navEventBtn, navLocationBtn, hamburgerMenu, offCanvasPage);
 
+var navbar = $("<nav uk-navbar>").addClass("uk-navbar-container uk-margin").append(navbarLeftDiv, navbarRightDiv);
 
 
 function searchEvent() {
