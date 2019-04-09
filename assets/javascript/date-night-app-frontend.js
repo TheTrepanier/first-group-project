@@ -36,6 +36,43 @@ var navbarRightDiv = $("<div>").addClass("uk-navbar-right").append(navEventBtn, 
 
 var navbar = $("<nav uk-navbar>").addClass("uk-navbar-container uk-margin").append(navbarLeftDiv, navbarRightDiv);
 
+// Pull info from the database and assign to arrays
+var recentVenueSearchTermsArray = [];
+console.log("recentVenueSearchTermsArray: ",recentVenueSearchTermsArray);
+
+var recentLocationSearchTermsArray = [];
+    // Recent Event Venues Searched
+database.ref("Recent Event").on("child_added", function(childSnapshot) {
+    var recentSearchTerm = childSnapshot.val().search;
+    recentVenueSearchTermsArray.unshift(recentSearchTerm);
+});
+    // Recent Locations Searched
+database.ref("Recent Location").on("child_added", function(childSnapshot) {
+    var recentLocationSearchTerm = childSnapshot.val().search;
+    recentLocationSearchTermsArray.unshift(recentLocationSearchTerm);
+});
+    // Recent Detailed Location
+database.ref("Recent Detailed Location").on("child_added", function(childSnapshot) {
+    var search = childSnapshot.val().search;
+    var detail = childSnapshot.val().detail;
+    var searchWithDetail = search + ": " + detail;
+    recentLocationSearchTermsArray.unshift(searchWithDetail);
+});
+
+function buildButtons(arrayBuildingFrom) {
+    var rawArray = arrayBuildingFrom;
+    console.log("rawArray: ", rawArray);
+    console.log("uniqueArray: ", [...new Set(rawArray)]);
+    
+
+    // for (let index = 0; index < rawArray.length; index++) {
+    //     const arrayItem = rawArray[i].toLowerCase();
+    //     normalizedArray.push(arrayItem);
+    // }
+    // for (let index = 0; index < normalizedArray.length; index++) {
+        
+    // }
+}
 
 function searchEvent() {
     var eventSearchTerm = "";
@@ -99,10 +136,11 @@ $(document).ready(function () {
     var searchDiv = $("<div>").append(searchInput, buttonsDiv);
     var landingDiv = $("<div>").addClass("uk-margin-xlarge-top").append(masthead, searchDiv);
     $("#root").append(landingDiv);
-
+    buildButtons(recentVenueSearchTermsArray)
+    
     $("#event-button").on("click", searchEvent);
     $("#location-button").on("click", searchLocation);
-
+    
     $(document.body).on("click", "#navbar-location-button", navbarLocationSearch);
     $(document.body).on("click", "#navbar-event-button", navbarEventSearch);
     $(document.body).on("click", "#moreSpecificYelpCallButton", offcanvasYelpSearch);
