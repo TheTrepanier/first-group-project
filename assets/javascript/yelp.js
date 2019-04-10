@@ -41,8 +41,9 @@ var yelpCall = function (locationFromSearch) {
             var yelpCardMediaLeft = $("<div>").addClass("uk-card-media-left uk-cover-container").append(yelpImg);
             var yelpCardTitle = $("<h2>").addClass("uk-card-title").text(name);
             var yelpCardText = $("<p>").text(item.location.display_address);
+            var yelpCardPhone = $("<p>").text(phone);
             var yelpCardStarRating = $("<p>").text(starRate);
-            var yelpCardBody = $("<div>").addClass("uk-card-body").append(yelpCardTitle, yelpCardText, yelpCardStarRating);
+            var yelpCardBody = $("<div>").addClass("uk-card-body").append(yelpCardTitle, yelpCardText, yelpCardPhone, yelpCardStarRating);
             var bodyDiv = $("<div>").append(yelpCardBody);
             var yelpResultsDiv = $("<div uk-grid>").addClass("uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin uk-margin-auto").append(yelpCardMediaLeft, bodyDiv);
             yelpResultsDiv.css({"width" : "45%"});
@@ -96,8 +97,9 @@ var modifiedYelpCall = function (locationFromSearch, yelpEventValue) {
             var yelpCardMediaLeft = $("<div>").addClass("uk-card-media-left uk-cover-container").append(yelpImg);
             var yelpCardTitle = $("<h2>").addClass("uk-card-title").text(name);
             var yelpCardText = $("<p>").text(item.location.display_address);
+            var yelpCardPhone = $("<p>").text(phone);
             var yelpCardStarRating = $("<p>").text(starRate);
-            var yelpCardBody = $("<div>").addClass("uk-card-body").append(yelpCardTitle, yelpCardText, yelpCardStarRating);
+            var yelpCardBody = $("<div>").addClass("uk-card-body").append(yelpCardTitle, yelpCardText, yelpCardPhone, yelpCardStarRating);
             var bodyDiv = $("<div>").append(yelpCardBody);
             var yelpResultsDiv = $("<div uk-grid>").addClass("uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin uk-margin-auto").append(yelpCardMediaLeft, bodyDiv);
             yelpResultsDiv.css({"width" : "45%"});
